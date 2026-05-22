@@ -1,0 +1,10 @@
+{
+  "name": "Remix: NSS College Ottapalam Units 36 \u0026 94",
+  "description": "An integrated digital platform for NSS Volunteers of NSS College Ottapalam to manage attendance, announcements, quizzes, and community initiatives.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

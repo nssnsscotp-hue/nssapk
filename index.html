@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NSS Portal</title>
+    <!-- PWA configuration -->
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="NSS Portal" />
+    <link rel="apple-touch-icon" href="https://i.ibb.co/k6WG4cv2/1000350739-removebg-preview.png" />
+  </head>
+  <body>
+    <div id="root">
+      <div style="height: 100vh; display: flex; align-items: center; justify-content: center; font-family: sans-serif; color: #64748b;">
+        <div style="text-align: center;">
+          <h2 style="font-weight: 900; letter-spacing: -0.05em; margin-bottom: 0.5rem;">NSS PORTAL</h2>
+          <p id="loading-text" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5;">Loading Infrastructure...</p>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Service Worker registration for PWA functionality
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('./sw.js').then(function(reg) {
+            console.log('NSS Portal Service Worker registered successfully:', reg.scope);
+          }).catch(function(err) {
+            console.warn('NSS Portal Service Worker registration failed:', err);
+          });
+        });
+      }
+
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        var loadingText = document.getElementById('loading-text');
+        if (loadingText) {
+          loadingText.style.color = '#ef4444';
+          loadingText.style.opacity = '1';
+          loadingText.innerHTML = 'Critical Error: ' + msg + '<br/><small>Check browser console</small>';
+        }
+        return false;
+      };
+      setTimeout(function() {
+        var loadingText = document.getElementById('loading-text');
+        if (loadingText && loadingText.innerHTML === 'Loading Infrastructure...') {
+          loadingText.innerHTML = 'Initialization delay... <button onclick="location.reload()" style="background:#3b82f6;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">Reload</button>';
+        }
+      }, 5000);
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

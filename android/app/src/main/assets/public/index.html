@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NSS Portal</title>
+    <script type="module" crossorigin src="/assets/index-D9F2gtC2.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-XLpMXYx_.css">
+  </head>
+  <body>
+    <div id="root">
+      <div style="height: 100vh; display: flex; align-items: center; justify-content: center; font-family: sans-serif; color: #64748b;">
+        <div style="text-align: center;">
+          <h2 style="font-weight: 900; letter-spacing: -0.05em; margin-bottom: 0.5rem;">NSS PORTAL</h2>
+          <p id="loading-text" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5;">Loading Infrastructure...</p>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        var loadingText = document.getElementById('loading-text');
+        if (loadingText) {
+          loadingText.style.color = '#ef4444';
+          loadingText.style.opacity = '1';
+          loadingText.innerHTML = 'Critical Error: ' + msg + '<br/><small>Check browser console</small>';
+        }
+        return false;
+      };
+      setTimeout(function() {
+        var loadingText = document.getElementById('loading-text');
+        if (loadingText && loadingText.innerHTML === 'Loading Infrastructure...') {
+          loadingText.innerHTML = 'Initialization delay... <button onclick="location.reload()" style="background:#3b82f6;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">Reload</button>';
+        }
+      }, 5000);
+    </script>
+  </body>
+</html>
+
